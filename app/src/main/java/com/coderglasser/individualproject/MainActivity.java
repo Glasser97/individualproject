@@ -3,7 +3,7 @@ package com.coderglasser.individualproject;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.view.ContextMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -60,10 +61,29 @@ public class MainActivity extends AppCompatActivity
         mData = new LinkedList<Data>();
         mAdapter = new MyAdapter((LinkedList<Data>) mData,mContext);
         list_one.setAdapter(mAdapter);
+        list_one.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                contextMenu.add(Menu.NONE, 0, 0, R.string.remove);
+            }
+        });
     }
 
     private void bindViews(){
         list_one = (ListView) findViewById(R.id.list_one);
+    }
+
+    //select and remove context
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo;
+        menuInfo =(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        switch (item.getItemId()) {
+            case 0:
+                mAdapter.remove(menuInfo.position);
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override
