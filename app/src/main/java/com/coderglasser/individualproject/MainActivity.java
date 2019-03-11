@@ -1,5 +1,6 @@
 package com.coderglasser.individualproject;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,10 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private ListView list_one;
+    private MyAdapter mAdapter = null;
+    private List<Data> mData = null;
+    private Context mContext = null;
+    //flag用来调试
+    public int flag=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +39,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                mAdapter.add(new Data(R.drawable.dianying,"电影","$"+flag));
+                flag++;
             }
         });
 
@@ -41,6 +52,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //ListView 和 MyAdapter 线性显示账单
+
+        mContext = MainActivity.this;
+        bindViews();
+        mData = new LinkedList<Data>();
+        mAdapter = new MyAdapter((LinkedList<Data>) mData,mContext);
+        list_one.setAdapter(mAdapter);
+    }
+
+    private void bindViews(){
+        list_one = (ListView) findViewById(R.id.list_one);
     }
 
     @Override
@@ -104,4 +127,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }
