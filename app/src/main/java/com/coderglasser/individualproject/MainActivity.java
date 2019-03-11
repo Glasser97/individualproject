@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAdapter.add(new Data(R.drawable.dianying,"电影","$"+flag));
+                Date date = new Date();
+                mAdapter.add(new Data(date.getTime(),R.drawable.dianying,"电影","$"+flag,date));
                 flag++;
             }
         });
