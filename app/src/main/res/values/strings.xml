@@ -7,4 +7,35 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="remove">remove</string>
+    <string name="add_records">add records</string>
+    <string name="defult_number">0</string>
+    <string name="output">支出</string>
+    <string name="input">收入</string>
+    <string name="anjie">奖金</string>
+    <string name="guanggao">学习</string>
+    <string name="baobao">箱包</string>
+    <string name="baojian">医疗</string>
+    <string name="baoxian">保险</string>
+    <string name="baoxiao">报销</string>
+    <string name="chashuikafei">饮料</string>
+    <string name="chuanpiao">船票</string>
+    <string name="daoyou">团费</string>
+    <string name="dapai">娱乐</string>
+    <string name="dianfei">水电费</string>
+    <string name="dianying">电影</string>
+    <string name="fangdai">贷款</string>
+    <string name="fangzu">房租</string>
+    <string name="fanka">饭卡</string>
+    <string name="feijipiao">旅游</string>
+    <string name="fuwu">小费</string>
+    <string name="gonggongqiche">公交</string>
+    <string name="haiwaidaigou">代购</string>
+    <string name="huankuan">工资</string>
+    <string name="huazhuangpin">美容</string>
+    <string name="huochepiao">地铁</string>
+    <string name="huwaishebei">户外</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

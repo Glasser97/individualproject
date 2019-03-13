@@ -1,6 +1,7 @@
 package com.coderglasser.individualproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.ContextMenu;
@@ -40,9 +41,11 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date date = new Date();
-                mAdapter.add(new Data(date.getTime(),R.drawable.dianying,"电影","$"+flag,date));
-                flag++;
+//                Date date = new Date();
+//                mAdapter.add(new Data(date.getTime(),R.drawable.dianying,"电影","$"+flag,date));
+//                flag++;
+                Intent intent= new Intent(MainActivity.this,SelectActivity.class);
+                startActivityForResult(intent,1);
             }
         });
 
