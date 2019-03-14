@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -28,13 +27,19 @@ public class MainActivity extends AppCompatActivity
     private MyAdapter mAdapter = null;
     private List<Data> mData = null;
     private Context mContext = null;
-    //flag用来调试
-    public int flag=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //连接到数据库
+        DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(this,"Record_db",null);
+        DaoMaster daoMaster = new DaoMaster(helper.getWritableDb());
+        DaoSession daoSession = daoMaster.newSession();
+        DataDao dataDao = daoSession.getDataDao();
+        //连接数据库完成
+
+        //设定工具栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //悬浮小圆球
@@ -42,14 +47,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Date date = new Date();
-//                mAdapter.add(new Data(date.getTime(),R.drawable.dianying,"电影","$"+flag,date));
-//                flag++;
                 Intent intent= new Intent(MainActivity.this,SelectActivity.class);
                 startActivityForResult(intent,1);
             }
         });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -63,8 +64,10 @@ public class MainActivity extends AppCompatActivity
 
         mContext = MainActivity.this;
         bindViews();
-        mData = new LinkedList<Data>();
-        mAdapter = new MyAdapter((LinkedList<Data>) mData,mContext);
+        //倒序从数据库中取值
+        mData = dataDao.queryBuilder().orderDesc(DataDao.Properties.Id).list();
+        mAdapter = new MyAdapter((List<Data>) mData,mContext);
+        //往listAdapter中填充数据库数据
         list_one.setAdapter(mAdapter);
         list_one.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -79,8 +82,16 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle=intent.getExtras();
         if (bundle!=null){
             Date date = new Date(bundle.getLong("dataId"));
-            mAdapter.add(new Data(bundle.getLong("dataId"),bundle.getInt("image"),bundle.getString("content"),
-                    bundle.getString("mount"),date));
+            Data data = new Data(bundle.getLong("dataId"),bundle.getInt("image"),bundle.getString("content"),
+                    bundle.getString("mount"),date);
+            //连接到数据库
+            DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(this,"Record_db",null);
+            DaoMaster daoMaster = new DaoMaster(helper.getWritableDb());
+            DaoSession daoSession = daoMaster.newSession();
+            DataDao dataDao = daoSession.getDataDao();
+            //连接数据库完成
+            dataDao.insert(data);
+            mAdapter.add(data);
         }else{
             Log.d("没有get到Intent",resultCode+"");
         }
@@ -98,8 +109,14 @@ public class MainActivity extends AppCompatActivity
         menuInfo =(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         switch (item.getItemId()) {
             case 0:
+                //连接到数据库
+                DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(this,"Record_db",null);
+                DaoMaster daoMaster = new DaoMaster(helper.getWritableDb());
+                DaoSession daoSession = daoMaster.newSession();
+                DataDao dataDao = daoSession.getDataDao();
+                //连接数据库完成
+                dataDao.delete(mAdapter.getItem(menuInfo.position));
                 mAdapter.remove(menuInfo.position);
-                //DataDao.deleteByKey(menuInfo.position);
                 break;
         }
         return super.onContextItemSelected(item);

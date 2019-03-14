@@ -9,16 +9,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.LinkedList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyAdapter extends BaseAdapter {
     private Context mContext;
-    private LinkedList<Data> mData;
+    private List<Data> mData;
 
     public MyAdapter() {
     }
 
-    public MyAdapter(LinkedList<Data> mData, Context mContext) {
+    public MyAdapter(List<Data> mData, Context mContext) {
         this.mData = mData;
         this.mContext = mContext;
     }
@@ -29,7 +31,7 @@ public class MyAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Data getItem(int position) {
         return mData.get(position);
     }
 
@@ -65,9 +67,9 @@ public class MyAdapter extends BaseAdapter {
 
     public void add(Data data) {
         if (mData == null) {
-            mData = new LinkedList<>();
+            mData = new ArrayList<Data>();
         }
-        mData.addFirst(data);
+        mData.add(0,data);
         notifyDataSetChanged();
     }
 
