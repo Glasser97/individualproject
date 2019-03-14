@@ -1,9 +1,12 @@
 package com.coderglasser.individualproject;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +29,7 @@ public class SelectActivity extends AppCompatActivity {
     private GridView grid_photo;
     private BaseAdapter mAdapter=null;
     private ArrayList<Icon> mIcon=null;
+    Intent intent = new Intent();
     ImageView imageView;
     TextView textView;
     Button outputButton;
@@ -71,12 +75,13 @@ public class SelectActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View v, int
                             position, long id) {
                         Icon passIcon = mIcon.get(position);
-                        //Bundle bundle = new Bundle();
-                        //bundle.putInt("image",passIcon.getiId());
-                        //bundle.putString("content",passIcon.getiName());
                         LayoutInflater inflater = LayoutInflater.from(SelectActivity.this);
                         View view = inflater.inflate(R.layout.input_window,null);
                         AlertDialog.Builder builder = new AlertDialog.Builder(SelectActivity.this);
+
+                        builder.setView(view);
+                        builder.setCancelable(true);
+                        final AlertDialog dialog = builder.create();
 
                         imageView=(ImageView) view.findViewById(R.id.add_icon);
                         textView=(TextView) view.findViewById(R.id.add_text);
@@ -84,24 +89,44 @@ public class SelectActivity extends AppCompatActivity {
                         outputButton = (Button) findViewById(R.id.btn_output);
                         textView.setText(passIcon.getiName());
                         imageView.setImageResource(passIcon.getiId());
+                        final int imgId = passIcon.getiId();
+                        final String imgName = passIcon.getiName();
                         final EditText editText = view.findViewById(R.id.txt_number);
+                        Log.d("imgId",imgName);
 //                        inputButton.setOnClickListener(new View.OnClickListener() {
 //                            @Override
 //                            public void onClick(View v) {
 //                                //计算收入的操作
-//                                Toast.makeText(SelectActivity.this,"inputdianji",Toast.LENGTH_SHORT).show();
+//                                Date date = new Date();
+//                                //Data data=new Data(date.getTime(),imgId,imgName,editText.getText().toString(),date);
+//                                Bundle bundle = new Bundle();
+//                                bundle.putLong("dataId",date.getTime());
+//                                bundle.putInt("image",imgId);
+//                                bundle.putString("content",imgName);
+//                                Log.d("date",date.toString());
+//                                bundle.putString("mount",editText.getText().toString());
+//                                intent.putExtra("newData",bundle);
+//
 //                            }
 //                        });
 //                        outputButton.setOnClickListener(new View.OnClickListener() {
 //                            @Override
 //                            public void onClick(View v) {
-//                                Toast.makeText(SelectActivity.this,"outputdianji",Toast.LENGTH_SHORT).show();
+//                                //计算支出的操作
+//                                Date date=new Date();
+//                                //Data data=new Data(date.getTime(),imgId,imgName,"-"+editText.getText().toString(),date);
+//                                Bundle bundle = new Bundle();
+//                                bundle.putLong("dataId",date.getTime());
+//                                bundle.putInt("image",imgId);
+//                                bundle.putString("content",imgName);
+//                                bundle.putString("mount","-"+editText.getText().toString());
+//                                intent.putExtra("newData",bundle);
 //                            }
 //                        });
-                        builder.setView(view);
-                        builder.setCancelable(true);
-                        final AlertDialog dialog = builder.create();
+
                         dialog.show();
+                        //SelectActivity.this.setResult(RESULT_OK,intent);
+                        //SelectActivity.this.finish();
 
                     }
                 });

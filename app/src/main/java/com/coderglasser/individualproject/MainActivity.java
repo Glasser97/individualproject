@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -73,6 +74,15 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Bundle bundle = intent.getBundleExtra("newData");
+        Date date = new Date(bundle.getLong("dataId"));
+        mAdapter.add(new Data(bundle.getLong("dataId"),bundle.getInt("image"),bundle.getString("content"),
+                bundle.getString("mount"),date));
+        //得到新Activity 关闭后返回的数据
+    }
+
     private void bindViews(){
         list_one = (ListView) findViewById(R.id.list_one);
     }
@@ -85,6 +95,7 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case 0:
                 mAdapter.remove(menuInfo.position);
+                //DataDao.deleteByKey(menuInfo.position);
                 break;
         }
         return super.onContextItemSelected(item);

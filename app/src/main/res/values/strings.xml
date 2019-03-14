@@ -13,7 +13,7 @@
     <string name="input">收入</string>
     <string name="anjie">奖金</string>
     <string name="guanggao">学习</string>
-    <string name="baobao">箱包</string>
+    <string name="baobao">超市</string>
     <string name="baojian">医疗</string>
     <string name="baoxian">保险</string>
     <string name="baoxiao">报销</string>
@@ -29,7 +29,7 @@
     <string name="feijipiao">旅游</string>
     <string name="fuwu">小费</string>
     <string name="gonggongqiche">公交</string>
-    <string name="haiwaidaigou">代购</string>
+    <string name="haiwaidaigou">网购</string>
     <string name="huankuan">工资</string>
     <string name="huazhuangpin">美容</string>
     <string name="huochepiao">地铁</string>
