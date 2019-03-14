@@ -86,48 +86,46 @@ public class SelectActivity extends AppCompatActivity {
                         imageView=(ImageView) view.findViewById(R.id.add_icon);
                         textView=(TextView) view.findViewById(R.id.add_text);
                         inputButton = (Button) view.findViewById(R.id.btn_input);
-                        outputButton = (Button) findViewById(R.id.btn_output);
+                        outputButton = (Button) view.findViewById(R.id.btn_output);
                         textView.setText(passIcon.getiName());
                         imageView.setImageResource(passIcon.getiId());
                         final int imgId = passIcon.getiId();
                         final String imgName = passIcon.getiName();
                         final EditText editText = view.findViewById(R.id.txt_number);
                         Log.d("imgId",imgName);
-//                        inputButton.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                //计算收入的操作
-//                                Date date = new Date();
-//                                //Data data=new Data(date.getTime(),imgId,imgName,editText.getText().toString(),date);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putLong("dataId",date.getTime());
-//                                bundle.putInt("image",imgId);
-//                                bundle.putString("content",imgName);
-//                                Log.d("date",date.toString());
-//                                bundle.putString("mount",editText.getText().toString());
-//                                intent.putExtra("newData",bundle);
-//
-//                            }
-//                        });
-//                        outputButton.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                //计算支出的操作
-//                                Date date=new Date();
-//                                //Data data=new Data(date.getTime(),imgId,imgName,"-"+editText.getText().toString(),date);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putLong("dataId",date.getTime());
-//                                bundle.putInt("image",imgId);
-//                                bundle.putString("content",imgName);
-//                                bundle.putString("mount","-"+editText.getText().toString());
-//                                intent.putExtra("newData",bundle);
-//                            }
-//                        });
+                        inputButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //计算收入的操作
+                                Date date = new Date();
+                                //Data data=new Data(date.getTime(),imgId,imgName,editText.getText().toString(),date);
+                                intent.putExtra("dataId",date.getTime());
+                                intent.putExtra("image",imgId);
+                                intent.putExtra("content",imgName);
+                                Log.d("date",date.toString());
+                                intent.putExtra("mount",editText.getText().toString());
+                                dialog.dismiss();
+                                SelectActivity.this.finish();
+
+                            }
+                        });
+                        outputButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //计算支出的操作
+                                Date date=new Date();
+                                //Data data=new Data(date.getTime(),imgId,imgName,"-"+editText.getText().toString(),date);
+                                intent.putExtra("dataId",date.getTime());
+                                intent.putExtra("image",imgId);
+                                intent.putExtra("content",imgName);
+                                intent.putExtra("mount","-"+editText.getText().toString());
+                                dialog.dismiss();
+                                SelectActivity.this.finish();
+                            }
+                        });
 
                         dialog.show();
-                        //SelectActivity.this.setResult(RESULT_OK,intent);
-                        //SelectActivity.this.finish();
-
+                        SelectActivity.this.setResult(RESULT_OK,intent);
                     }
                 });
     }

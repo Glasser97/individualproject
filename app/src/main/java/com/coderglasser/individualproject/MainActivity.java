@@ -76,10 +76,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        Bundle bundle = intent.getBundleExtra("newData");
-        Date date = new Date(bundle.getLong("dataId"));
-        mAdapter.add(new Data(bundle.getLong("dataId"),bundle.getInt("image"),bundle.getString("content"),
-                bundle.getString("mount"),date));
+        Bundle bundle=intent.getExtras();
+        if (bundle!=null){
+            Date date = new Date(bundle.getLong("dataId"));
+            mAdapter.add(new Data(bundle.getLong("dataId"),bundle.getInt("image"),bundle.getString("content"),
+                    bundle.getString("mount"),date));
+        }else{
+            Log.d("没有get到Intent",resultCode+"");
+        }
         //得到新Activity 关闭后返回的数据
     }
 
