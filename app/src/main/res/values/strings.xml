@@ -2,8 +2,8 @@
     <string name="app_name">IndividualProject</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Coming Soon</string>
+    <string name="nav_header_subtitle">This function is coming soon.</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="remove">remove</string>
@@ -11,6 +11,7 @@
     <string name="defult_number">0</string>
     <string name="output">支出</string>
     <string name="input">收入</string>
+    <string name="jieyu">结余</string>
     <string name="anjie">奖金</string>
     <string name="guanggao">学习</string>
     <string name="baobao">超市</string>
@@ -34,6 +35,7 @@
     <string name="huazhuangpin">美容</string>
     <string name="huochepiao">地铁</string>
     <string name="huwaishebei">户外</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
