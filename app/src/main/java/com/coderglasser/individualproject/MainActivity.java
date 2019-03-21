@@ -202,13 +202,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            Toast.makeText(this,"This is DrawableLayout",Toast.LENGTH_LONG).show();
+        } else if (id == R.id.nav_sync) {
+            Toast.makeText(this,"This is Synchronize",Toast.LENGTH_LONG).show();
 
-        } else if (id == R.id.nav_slideshow) {
-            Toast.makeText(this,"This is DrawableLayout",Toast.LENGTH_LONG).show();
-
-        } else if (id == R.id.nav_manage) {
+        }  else if (id == R.id.nav_manage) {
             Toast.makeText(this,"This is DrawableLayout",Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.nav_share) {
